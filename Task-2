@@ -1,0 +1,95 @@
+/*STUDENT GRADE TRACKER*/
+import java.util.ArrayList;
+import java.util.Scanner;
+
+		public class StudentGradeManager {
+
+		    static class Grade {
+		        String subject;
+		        double grade;
+
+		        Grade(String subject, double grade) {
+		            this.subject = subject;
+		            this.grade = grade;
+		        }
+		    }
+
+		    public static void main(String[] args) {
+		        Scanner scanner = new Scanner(System.in);
+		        ArrayList<Grade> grades = new ArrayList<>();
+
+		        while (true) {
+		            // Input grade
+		            System.out.print("Enter the subject (or type 'done' to finish): ");
+		            String subject = scanner.next();
+		            if (subject.equalsIgnoreCase("done")) {
+		                break;
+		            }
+
+		            System.out.print("Enter the grade for " + subject + ": ");
+		            double grade = scanner.nextDouble();
+
+		            // Add grade to the list
+		            grades.add(new Grade(subject, grade));
+		        }
+
+		        // Calculate average grade
+		        double total = 0;
+		        for (Grade g : grades) {
+		            total += g.grade;
+		        }
+		        double averageGrade = total / grades.size();
+
+		        // Determine letter grade and GPA
+		        String letterGrade = getLetterGrade(averageGrade);
+		        double gpa = getGPA(letterGrade);
+
+		        // Display results
+		        System.out.println("\n--- Student Grades ---");
+		        for (Grade g : grades) {
+		            System.out.println(g.subject + ": " + g.grade);
+		        }
+		        System.out.println("Average Grade: " + averageGrade);
+		        System.out.println("Letter Grade: " + letterGrade);
+		        System.out.println("GPA: " + gpa);
+
+		        scanner.close();
+		    }
+
+		    // Convert numerical grade to letter grade
+		    public static String getLetterGrade(double averageGrade) {
+		        if (averageGrade >= 90) {
+		            return "A";
+		        } else if (averageGrade >= 80) {
+		            return "B";
+		        } else if (averageGrade >= 70) {
+		            return "C";
+		        } else if (averageGrade >= 60) {
+		            return "D";
+		        } else {
+		            return "F";
+		        }
+		    }
+
+		    // Convert letter grade to GPA
+		    public static double getGPA(String letterGrade) {
+		        switch (letterGrade) {
+		            case "A":
+		                return 4.0;
+		            case "B":
+		                return 3.0;
+		            case "C":
+		                return 2.0;
+		            case "D":
+		                return 1.0;
+		            case "F":
+		                return 0.0;
+		            default:
+		                return 0.0;
+		        }
+		    }
+		}
+
+	
+
+
